@@ -1,0 +1,21 @@
+RewriteEngine On
+
+Options -Indexes
+
+RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^www.(.*) [NC]
+RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+RewriteRule ^view/(.*)$ https://%{HTTP_HOST}
+
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{HTTPS} on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+php_flag session.cookie_httponly on

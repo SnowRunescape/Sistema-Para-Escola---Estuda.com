@@ -1,0 +1,327 @@
+* {
+	padding:0px;
+	margin:0px;
+	font-family:Montserrat;
+	box-sizing:border-box;
+}
+
+.container {
+	width:1024px;
+	max-width:100%;
+	margin:0px auto;
+}
+
+/*
+ * Header Panel
+ */
+#webApp-header {
+	position:relative;
+	background-color:#0878dd;
+	height:60px;
+	box-shadow:0px 1px 10px 1px rgba(69, 65, 78, 0.5);
+	z-index:2;
+}
+
+#webApp-header .logo {
+	position:absolute;
+	top:9.5px;
+	left:28px;
+}
+
+#webApp-header .logo img {
+	width:160px;
+}
+
+#webApp-header .menu__right {
+	position:absolute;
+	right:20px;
+	top:18px;
+}
+
+#webApp-header .menu__right a {
+	margin:3px;
+	vertical-align:middle;
+	cursor:pointer;
+}
+
+#webApp-header .menu__right img {
+	width:26px;
+}
+
+#webApp-header .menu__right a.onlyMobile {
+	display:none;
+}
+
+@media only screen and (max-width: 600px){
+	#webApp-header .menu__right a.onlyMobile {
+		display:unset;
+	}
+}
+
+/*
+ * Main Left Menu
+ */
+#webApp-main {
+	display:flex;
+	background-color:#f0eff6;
+	height:100%;
+}
+
+#webApp-main__menu {
+	display:inline-block;
+	background-color:#fff;
+	width:280px;
+	min-height: 100%;
+	vertical-align:top;
+	padding:16px;
+	box-shadow:0px 0px 5px 1px rgba(69, 65, 78, 0.5);
+	z-index:1;
+}
+
+#webApp-main__menu .header {
+	padding-bottom:8px;
+	border-bottom:solid 2px #eae9ed;
+}
+
+#webApp-main__menu .header .avatar {
+	display:inline-block;
+	margin-right:8px;
+	vertical-align:middle;
+}
+
+#webApp-main__menu .header .avatar img {
+	max-width:64px;
+}
+
+#webApp-main__menu .header .info {
+	font-weight:600;
+	display:inline-block;
+	position:relative;
+	vertical-align:middle;
+}
+
+#webApp-main__menu .buttons {
+	margin:16px 0px;
+}
+
+#webApp-main__menu .buttons a {
+	text-decoration:none;
+}
+
+#webApp-main__menu .buttons ul li {
+	padding:12px 8px;
+	margin:4px 0px;
+	transition:.4s;
+	color:#000;
+}
+
+#webApp-main__menu .buttons ul li:hover {
+	background-color:#f0eff6;
+	border-radius:5px;
+}
+
+#webApp-main__menu .buttons ul {
+	list-style-type:none;
+}
+
+#webApp-main__menu .buttons ul li.selected {
+	background-color:#0878dd;
+	color:#fff;
+	border-radius:5px;
+}
+
+#webApp-main__container {
+	display:inline-block;
+	width:calc(100% - 280px);
+	min-height:100%;
+	max-width:1124px;
+	margin:0 auto;
+	padding:16px;
+}
+
+#webApp-main__container > .title{
+	font-size:32px;
+    font-weight:600;
+    color:#333;
+}
+
+#webApp-main__container .divisory {
+	border-top:solid 1px #e1e1e7;
+	margin:12px 0;
+}
+
+#webApp-main__container > .buttons {
+    margin:8px 0px;
+	text-align:right;
+}
+
+#webApp-main__container > .buttons a {
+	display:inline-block;
+}
+
+#webApp-main__container > .content {
+	position:relative;
+	border-radius:5px;
+	background:#fff;
+	color:#73808c;
+	box-shadow:0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+	padding:8px;
+}
+
+/*
+ * Buttons
+ */
+.btn {
+	outline:none;
+	cursor:pointer;
+	border:none;
+	border-radius:5px;
+	font-size:15px;
+	background:#cdd1d3;
+	color:#fff;
+	padding:8px 12px;
+	text-decoration:none;
+	transition:.4s;
+}
+
+.btn:hover {
+	background:#bbc3c7;
+}
+
+.btn.btn-success {
+	background:#28a745;
+	color:#fff;
+}
+
+.btn.btn-success:hover {
+	background:#2ab64f;
+}
+
+/*
+ * Sistema de Form
+ */
+form .field label {
+	display:block;
+	color:#333;
+	font-size:15px;
+	font-weight:600;
+	letter-spacing:2px;
+	margin-bottom:4px;
+	margin-left:4px;
+}
+
+form .field input {
+	padding:8px;
+	border:solid 1px #eaeaea;
+	border-radius:5px;
+	outline:none;
+}
+
+form .field:not(:first-of-type){
+	margin-top:12px;
+}
+
+.webAppForm__error {
+	margin:12px 0px;
+	padding:8px;
+	background:#e74c3c;
+	border-radius:5px;
+	color:#fff;
+	display:none;
+}
+
+.webAppForm__loading {
+	position:absolute;
+	background:rgba(255,255,255,.8);
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	border-radius:5px;
+	z-index:5;
+	display:none;
+}
+
+.webAppForm__loading img {
+	position:relative;
+	width:120px;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+}
+
+form .divisory {
+	border-top:solid 1px #e3e3e3;
+	margin:12px 0;
+}
+
+/*
+ * Page School
+ */
+#schools {
+	display:flex;
+	flex-wrap:wrap;
+}
+
+#schools .school {
+	display:flex;
+	flex:0 0 100%;
+	padding:8px;
+}
+
+#schools .school:not(:first-child) {
+	border-top:solid 1px #eee;
+}
+
+#schools .school .image {
+	margin-right:8px;
+	display:flex;
+	flex:0 0 0;
+	align-items:center;
+}
+
+#schools .school .image img {
+	width:64px;
+}
+
+#schools .school .title {
+	display:flex;
+	flex:1 0 0;
+	color:#333;
+	font-size:18px;
+	align-items:center;
+}
+
+#schools .school .buttons {
+	display:flex;
+	flex:0 0 0;
+	align-items:center;
+}
+
+#schools .school .buttons a {
+	margin:0px 6px;
+}
+
+#schools .school .buttons img {
+	width:21px;
+}
+
+#webAppForm-school {
+	margin:6px 6px;
+}
+
+/*
+ * Box Error
+ */
+.webAppBox__error {
+	margin:8px;
+}
+
+.webAppBox__error .title {
+	font-size:26px;
+    color:#333;
+}
+
+.webAppBox__error .content {
+	margin-top:12px;
+}
