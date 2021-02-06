@@ -31,34 +31,43 @@
 				<div class="divisory"></div>
 				
 				<div class="buttons">
-					<a href="/panel/schools/new" class="btn btn-success">+ Nova Turma</a>
+					<a href="/panel/classes/new" class="btn btn-success">+ Nova Turma</a>
 				</div>
 				
 				<div class="content">
-					<div id="schools">
+					<div id="classes">
 						<?php
 							$listClasses = $classes->all();
 							
 							if($listClasses){
 								foreach($listClasses as $row){ ?>
-									<div class="school">
+									<div class="classe">
 										<div class="image">
-											<img src="/assets/img/icons/icon-school.svg">
+											<img src="/assets/img/icons/icon-classes.svg">
 										</div>
 										
-										<div class="title">
-											<?= htmlspecialchars($row->name); ?>
+										<div class="info">
+											<p><b>Turma:</b> <?= $row->id; ?></p>
+											<p><b>Escola:</b> <?= $row->school->name; ?></p>
 										</div>
 										
 										<div class="buttons">
-											<a href="/panel/schools/edit/<?= $row->id; ?>"><img src="/assets/img/icons/icon-edit.svg"></a>
-											<a onclick="webApp.school.prepareRemoveSchool(<?= $row->id; ?>)"><img src="/assets/img/icons/icon-delete.svg"></a>
+											<a href="/panel/classes/edit/<?= $row->id; ?>"><img src="/assets/img/icons/icon-edit.svg"></a>
+											<a onclick="webApp.classes.prepareRemoveClasse(<?= $row->id; ?>)"><img src="/assets/img/icons/icon-delete.svg"></a>
 										</div>
 									</div>
 								<?php }
-							} else {
-								echo 'nenhuma escola publicada ate o momento';
-							}
+							} else { ?>
+								<div class="webAppBox__error">
+									<div class="title">
+										Nenhuma Turma Localizada
+									</div>
+									
+									<div class="content">
+										Nenhuma turma criada ate o momento!
+									</div>
+								</div>
+							<?php }
 						?>
 					</div>
 				</div>

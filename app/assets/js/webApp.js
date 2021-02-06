@@ -134,5 +134,80 @@ const webApp = {
 				}
 			});
 		}
+	},
+	classes: {
+		newClasse(){
+			let _form = '#webAppForm-classe';
+			
+			webApp.form.loading.show(_form);
+			
+			webApp.form.error.hide(_form, 0);
+			
+			$.ajax({
+				url: '/api/classes/newClasse',
+				type: 'POST',
+				data: $(_form).serialize()
+			}).done(function(data){
+				window.location.href = '/panel/classes'
+			}).fail(function(data){
+				webApp.form.error.setMessage(_form, data.responseJSON.message);
+				webApp.form.error.show(_form);
+				
+				webApp.form.loading.hide(_form);
+			});
+		},
+		editClasse(){
+			let _form = '#webAppForm-classe';
+			
+			webApp.form.loading.show(_form);
+			
+			webApp.form.error.hide(_form, 0);
+			
+			$.ajax({
+				url: '/api/classes/editClasse',
+				type: 'POST',
+				data: $(_form).serialize()
+			}).done(function(data){
+				window.location.href = '/panel/classes'
+			}).fail(function(data){
+				webApp.form.error.setMessage(_form, data.responseJSON.message);
+				webApp.form.error.show(_form);
+				
+				webApp.form.loading.hide(_form);
+			});
+		},
+		removeClasse(id){
+			let _form = '#classes';
+			
+			webApp.form.loading.show(_form);
+			
+			$.ajax({
+				url: '/api/classes/deleteClasse',
+				type: 'POST',
+				data: { 'id': id }
+			}).done(function(data){
+				location.reload();
+			}).fail(function(data){
+				Swal.fire('Oops...', data.responseJSON.message, 'error').then((result) => {
+					webApp.form.loading.hide(_form);
+				});
+			});
+		},
+		prepareRemoveClasse(id){
+			Swal.fire({
+				title: 'Você tem certeza?',
+				text: 'Você não poderá reverter isso!',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Sim, exclua!',
+				cancelButtonText: 'Não, cancelar!'
+			}).then((result) => {
+				if(result.isConfirmed){
+					webApp.classes.removeClasse(id);
+				}
+			});
+		}
 	}
 };

@@ -10,6 +10,8 @@
 		<meta name="googlebot" content="all">
 		
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" async>
+		
+		<script>window.location.href = '/panel'</script>
 	</head>
 	
 	<style>

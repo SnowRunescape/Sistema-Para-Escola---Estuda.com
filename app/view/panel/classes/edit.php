@@ -1,10 +1,10 @@
 <?php
-$schoolID = (isset($params[4])) ? $params[4] : null;
+$classeID = (isset($params[4])) ? $params[4] : null;
 
-$school = $schools->find($schoolID);
+$classe = $classes->find($classeID);
 
-if($school){
-	require 'view/panel/schools/edit/edit.php';
+if($classe){
+	require 'view/panel/classes/edit/edit.php';
 } else {
 	require 'view/panel/error/404.php';
 }

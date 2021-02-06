@@ -1,67 +1,112 @@
 <?php
+require_once 'controller/Schools.class.php';
+
 class Classes {
+	const EDUCATION_LEVEL = [
+		0 => 'Ensino Fundamental',
+		1 => 'Ensino Medio'
+	];
+	
+	const SERIES = [
+		0 => [
+			0 => '1° Serie',
+			1 => '2° Serie',
+			2 => '3° Serie',
+			3 => '4° Serie',
+			4 => '5° Serie',
+			5 => '6° Serie',
+			6 => '7° Serie',
+			7 => '8° Serie',
+			8 => '9° Serie'
+		],
+		1 => [
+			0 => '1° Ano',
+			1 => '2° Ano',
+			2 => '3° Ano'
+		]
+	];
+	
+	const PERIOD = [
+		0 => 'Matutino',
+		1 => 'Vespertino',
+		2 => 'Noturno'
+	];
+	
 	public function all(){
-		$school = [];
+		$classes = [];
 		
-		$studentsSQL = DB::conn()->prepare('SELECT * FROM schools');
+		$studentsSQL = DB::conn()->prepare('SELECT * FROM classes');
 		$studentsSQL->execute();
 		
-		while($row = $studentsSQL->fetchObject(Classes::class)){
-			$school[] = $row;
+		while($classe = $studentsSQL->fetchObject(Classes::class)){
+			$schools = new Schools();
+			
+			$classe->school = $schools->find($classe->school_id);
+			
+			$classes[] = $classe;
 		}
 		
-		if(count($school) == 0){
+		if(count($classes) == 0){
 			return false;
 		}
 		
-		return $school;
+		return $classes;
 	}
 	
-	public function register(SchoolFormModel $formModel){
-		$studentsSQL = DB::conn()->prepare('INSERT INTO schools
-			(name, andress, date, status) VALUES
-			(:name, :andress, :date, :status)'
+	public function register(ClasseFormModel $formModel){
+		$classesSQL = DB::conn()->prepare('INSERT INTO classes
+			(school_id, education_level, series, period) VALUES
+			(:school_id, :education_level, :series, :period)'
 		);
-		$studentsSQL->execute([
-			':name' => $formModel->name,
-			':andress' => $formModel->andress,
-			':date' => '0000-00-00',
-			':status' => 1
+		$classesSQL->execute([
+			':school_id' => $formModel->school_id,
+			':education_level' => $formModel->education_level,
+			':series' => $formModel->series,
+			':period' => $formModel->period
 		]);
 		
-		if($studentsSQL->rowCount() > 0){
+		if($classesSQL->rowCount() > 0){
 			return true;
 		}
 		
 		return false;
 	}
 	
-	public function edit($id, SchoolFormModel $formModel){
-		$schoolsSQL = DB::conn()->prepare('UPDATE schools
-			SET name = :name, andress = :andress WHERE id = :id LIMIT 1'
+	public function edit($id, ClasseFormModel $formModel){
+		$classesSQL = DB::conn()->prepare('UPDATE classes
+			SET school_id = :school_id, education_level = :education_level,
+			series = :series, period = :period WHERE id = :id LIMIT 1'
 		);
-		$schoolsSQL->execute([
+		$classesSQL->execute([
 			':id' => $id,
-			':name' => $formModel->name,
-			':andress' => $formModel->andress
+			':school_id' => $formModel->school_id,
+			':education_level' => $formModel->education_level,
+			':series' => $formModel->series,
+			':period' => $formModel->period
 		]);
 	}
 	
 	public function find($id){
-		$studentsSQL = DB::conn()->prepare('SELECT * FROM schools WHERE id = :id LIMIT 1');
-		$studentsSQL->execute([
+		$classesSQL = DB::conn()->prepare('SELECT * FROM classes WHERE id = :id LIMIT 1');
+		$classesSQL->execute([
 			':id' => $id
 		]);
 		
-		if($studentsSQL->rowCount() > 0){
-			return $studentsSQL->fetchObject(Schools);
+		if($classesSQL->rowCount() > 0){
+			$classe = $classesSQL->fetchObject(Classes);
+			
+			$schools = new Schools();
+			
+			$classe->school = $schools->find($classe->school_id);
+			
+			return $classe;
 		}
 		
 		return false;
 	}
 	
 	public function remove($id){
-		$schoolsSQL = DB::conn()->prepare('DELETE FROM schools WHERE id = :id LIMIT 1');
+		$schoolsSQL = DB::conn()->prepare('DELETE FROM classes WHERE id = :id LIMIT 1');
 		$schoolsSQL->execute([
 			':id' => $id
 		]);

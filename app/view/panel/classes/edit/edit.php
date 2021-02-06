@@ -14,6 +14,14 @@
 		
 		<script src="/assets/js/jquery.min.js"></script>
 		<script src="/assets/js/webApp.js"></script>
+		
+		<script>
+			function educationLevelChange(e){
+				$('#webAppForm-classe select[name="series"] option').attr('hidden', true);
+				$('#webAppForm-classe select[name="series"] option[disabled]').prop('selected', true);
+				$('#webAppForm-classe select[name="series"] option[education_level="' + e.value + '"]').removeAttr('hidden');
+			}
+		</script>
 	</head>
 	
 	<body>
@@ -24,28 +32,90 @@
 			
 			<div id="webApp-main__container">
 				<div class="title">
-					Editando Escola
+					Nova Turma
 				</div>
 				
 				<div class="divisory"></div>
 				
 				<div class="content">
-					<form id="webAppForm-school" onsubmit="webApp.school.editSchool();return false;" autocomplete="off">
+					<form id="webAppForm-classe" onsubmit="webApp.classes.editClasse();return false;" autocomplete="off">
 						<div class="webAppForm__error"></div>
 						
 						<div class="field">
-							<label>ID da Escola</label>
-							<input type="text" name="id" placeholder="Nome da Escola" value="<?= $school->id; ?>">
+							<label>Turma</label>
+							
+							<input value="<?= $classe->id ?>" disabled>
+							<input type="hidden" name="classe_id" value="<?= $classe->id ?>">
 						</div>
 						
 						<div class="field">
-							<label>Nome da Escola</label>
-							<input type="text" name="name" placeholder="Nome da Escola" value="<?= htmlspecialchars($school->name); ?>">
+							<label>Selecione a Escola</label>
+							
+							<select name="school_id">
+								<option selected disabled hidden>Selecione uma Escola</option>
+								
+								<?php
+									$schools = new Schools();
+									
+									$schoolsList = $schools->all();
+									
+									foreach($schoolsList as $school){
+										echo '<option value="' . $school->id . '" ' . (($school->id == $classe->school->id) ? "selected" : '') . '>'.$school->name.'</option>';
+									}
+								?>
+							</select>
 						</div>
 						
 						<div class="field">
-							<label>Endereço da Escola</label>
-							<input type="text" name="andress" placeholder="Endereço da Escola" value="<?= $school->andress; ?>">
+							<label>Selecione o Nivel de Ensino</label>
+							
+							<select name="education_level" onchange="educationLevelChange(this);">
+								<option selected disabled hidden>Selecione o Nivel de Ensino</option>
+								<option value="0" <?= (($classe->education_level == 0) ? 'selected' : ''); ?>>Ensino Fundamental</option>
+								<option value="1" <?= (($classe->education_level == 1) ? 'selected' : ''); ?>>Ensino Medio</option>
+							</select>
+						</div>
+						
+						<div class="field">
+							<label>Serie</label>
+							
+							<select name="series">
+								<option selected disabled>Selecione a Serie</option>
+								
+								<?php
+									foreach(Classes::SERIES as $education_level => $series){
+										foreach($series as $series_key => $series_value){
+											if($classe->education_level == $education_level){
+												if($classe->series == $series_key){
+													echo '<option value="' . $series_key . '" education_level="' . $education_level . '" selected>' . $series_value . '</option>';
+												} else {
+													echo '<option value="' . $series_key . '" education_level="' . $education_level . '">' . $series_value . '</option>';
+												}
+											} else {
+												echo '<option value="' . $series_key . '" education_level="' . $education_level . '" hidden>' . $series_value . '</option>';
+											}
+										}
+									}
+								?>
+							</select>
+						</div>
+						
+						<div class="field">
+							<label>Periodo</label>
+							
+							<select name="period">
+								<option selected disabled hidden>Selecione o Periodo</option>
+								
+								<?php
+									foreach(Classes::PERIOD as $period_key => $period_value){
+										if($classe->period == $period_key){
+											echo '<option value="' . $period_key . '" selected>' . $period_value .'</option>';
+										} else {
+											echo '<option value="' . $period_key . '">' . $period_value .'</option>';
+										}
+									}
+								?>
+							</select>
 						</div>
 						
 						<div class="field">

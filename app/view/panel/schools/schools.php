@@ -56,9 +56,17 @@
 										</div>
 									</div>
 								<?php }
-							} else {
-								echo 'nenhuma escola publicada ate o momento';
-							}
+							} else { ?>
+								<div class="webAppBox__error">
+									<div class="title">
+										Nenhuma Escola Localizada
+									</div>
+									
+									<div class="content">
+										Nenhuma Escola criada ate o momento!
+									</div>
+								</div>
+							<?php }
 						?>
 					</div>
 				</div>

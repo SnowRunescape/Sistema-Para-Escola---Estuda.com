@@ -54,7 +54,7 @@ class Schools {
 		]);
 		
 		if($studentsSQL->rowCount() > 0){
-			return $studentsSQL->fetchObject(Schools);
+			return $studentsSQL->fetchObject(Schools::class);
 		}
 		
 		return false;

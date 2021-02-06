@@ -19,7 +19,6 @@ class Auth {
 					return true;
 				}
 			} catch(PDOException $e){
-				echo $e;
 				return false;
 			}
 		}

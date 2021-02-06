@@ -168,6 +168,27 @@
 	padding:8px;
 }
 
+@media only screen and (max-width: 860px){
+	#webApp-main__menu {
+		position:fixed;
+		top:0px;
+		left:-280px;
+		height:100%;
+		overflow-y:auto;
+		transition:left .7s;
+		z-index:2;
+	}
+	
+	#webApp-main__menu.active {
+		left:0px;
+	}
+	
+	#webApp-main__container {
+		width:100%;
+		padding:8px;
+	}
+}
+
 /*
  * Buttons
  */
@@ -217,6 +238,14 @@ form .field input {
 	outline:none;
 }
 
+form .field select {
+	border:solid 1px #eaeaea;
+	border-radius:5px;
+	padding:8px;
+	color:#333;
+	outline:none;
+}
+
 form .field:not(:first-of-type){
 	margin-top:12px;
 }
@@ -256,7 +285,7 @@ form .divisory {
 }
 
 /*
- * Page School
+ * Page Schools
  */
 #schools {
 	display:flex;
@@ -281,7 +310,7 @@ form .divisory {
 }
 
 #schools .school .image img {
-	width:64px;
+	width:52px;
 }
 
 #schools .school .title {
@@ -307,6 +336,65 @@ form .divisory {
 }
 
 #webAppForm-school {
+	margin:6px 6px;
+}
+
+/*
+ * Page Classes
+ */
+#classes {
+	display:flex;
+	flex-wrap:wrap;
+}
+
+#classes .classe {
+	display:flex;
+	flex:0 0 100%;
+	padding:8px;
+}
+
+#classes .classe:not(:first-child) {
+	border-top:solid 1px #eee;
+}
+
+#classes .classe .image {
+	margin-right:8px;
+	display:flex;
+	flex:0 0 0;
+	align-items:center;
+}
+
+#classes .classe .image img {
+	width:52px;
+}
+
+#classes .classe .info {
+	display:flex;
+	flex:1 0 0;
+	color:#333;
+	align-items:center;
+}
+
+#classes .classe .info p {
+	display:grid;
+	margin:6px;
+}
+
+#classes .classe .buttons {
+	display:flex;
+	flex:0 0 0;
+	align-items:center;
+}
+
+#classes .classe .buttons a {
+	margin:0px 6px;
+}
+
+#classes .classe .buttons img {
+	width:21px;
+}
+
+#webAppForm-classe {
 	margin:6px 6px;
 }
 

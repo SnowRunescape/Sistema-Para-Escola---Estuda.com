@@ -1,7 +1,7 @@
 <?php
-$userPage = $params[3] ?: null;
+$classesPage = (isset($params[3])) ? $params[3] : null;
 
-$paramsLocal = __DIR__ . "/user/{$userPage}.php";
+$paramsLocal = __DIR__ . "/classes/{$classesPage}.php";
 
 if(file_exists($paramsLocal)){
 	require $paramsLocal;
