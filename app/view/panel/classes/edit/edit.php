@@ -32,7 +32,7 @@
 			
 			<div id="webApp-main__container">
 				<div class="title">
-					Nova Turma
+					Editando Turma
 				</div>
 				
 				<div class="divisory"></div>
@@ -71,8 +71,16 @@
 							
 							<select name="education_level" onchange="educationLevelChange(this);">
 								<option selected disabled hidden>Selecione o Nivel de Ensino</option>
-								<option value="0" <?= (($classe->education_level == 0) ? 'selected' : ''); ?>>Ensino Fundamental</option>
-								<option value="1" <?= (($classe->education_level == 1) ? 'selected' : ''); ?>>Ensino Medio</option>
+								
+								<?php
+									foreach(Classes::EDUCATION_LEVEL as $education_level_key => $education_level_value){
+										if($classe->education_level == $education_level_key){
+											echo '<option value="' . $education_level_key . '" selected>' . $education_level_value . '</option>';
+										} else {
+											echo '<option value="' . $education_level_key . '">' . $education_level_value . '</option>';
+										}
+									}
+								?>
 							</select>
 						</div>
 						
@@ -116,6 +124,12 @@
 									}
 								?>
 							</select>
+						</div>
+						
+						<div class="field">
+							<label>Ano</label>
+							
+							<input type="number" name="year" value="<?= $classe->year; ?>">
 						</div>
 						
 						<div class="field">

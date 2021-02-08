@@ -1,13 +1,8 @@
 <?php
 require_once 'controller/Classes.class.php';
 
-require_once 'model/ClasseFormModel.php';
-
-$formModel = new ClasseFormModel();
-$formModel->load($_POST);
-
-if(isset($_POST['id'])){
-	$classeID = trim($_POST['id']);
+if(isset($_POST['classe_id'])){
+	$classeID = trim($_POST['classe_id']);
 	
 	$classes = new Classes();
 	

@@ -1,21 +1,27 @@
 <?php
+require_once 'controller/Students.class.php';
+
 require_once 'model/StudentFormModel.php';
 
 $formModel = new StudentFormModel();
 $formModel->load($_POST);
 
-if($formModel->validate()){
-	$students = new Students();
+if(isset($_POST['student_id'])){
+	$studentID = trim($_POST['student_id']);
 	
-	try {
-		if($students->edit($formModel)){
+	if($formModel->validate()){
+		$students = new Students();
+		
+		try {
+			$students->edit($studentID, $formModel);
+			
 			$response = [
 				'status' => 200,
 				'd' => [
 					'message' => 'Informações do aluno modificado com sucesso!'
 				]
 			];
-		} else {
+		} catch(Exception $e){
 			$response = [
 				'status' => 500,
 				'd' => [
@@ -23,19 +29,12 @@ if($formModel->validate()){
 				]
 			];
 		}
-	} catch(Exception $e){
+	} else {
 		$response = [
-			'status' => 500,
+			'status' => 400,
 			'd' => [
-				'message' => 'Ocorreu um erro, tente novamente mais tarde!'
+				'message' => array_values($formModel->getErrors())[0]
 			]
 		];
 	}
-} else {
-	$response = [
-		'status' => 400,
-		'd' => [
-			'message' => array_values($formModel->getErrors())[0]
-		]
-	];
 }

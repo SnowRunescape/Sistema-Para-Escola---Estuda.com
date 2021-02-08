@@ -1,4 +1,10 @@
 const webApp = {
+	menu: {
+		toggleMenu(){
+			let element = document.getElementById('webApp-main__menu');
+			element.classList.toggle('active');
+		}
+	},
 	form: {
 		loading: {
 			show(form){
@@ -36,28 +42,6 @@ const webApp = {
 			hide(form, delay = 300){
 				$(form + ' .webAppForm__error').fadeOut(delay);
 			}
-		}
-	},
-	user: {
-		login(){
-			let _form = '#webAppForm-login';
-			
-			webApp.form.loading.show(_form);
-			
-			webApp.form.error.hide(_form, 0);
-			
-			$.ajax({
-				url: '/api/user/login',
-				type: 'POST',
-				data: $(_form).serialize()
-			}).done(function(data){
-				window.location.href = '/panel'
-			}).fail(function(data){
-				webApp.form.error.setMessage(_form, data.responseJSON.message);
-				webApp.form.error.show(_form);
-				
-				webApp.form.loading.hide(_form);
-			});
 		}
 	},
 	school: {
@@ -109,7 +93,7 @@ const webApp = {
 			$.ajax({
 				url: '/api/schools/deleteSchool',
 				type: 'POST',
-				data: { 'id': id }
+				data: { 'school_id': id }
 			}).done(function(data){
 				location.reload();
 			}).fail(function(data){
@@ -184,7 +168,7 @@ const webApp = {
 			$.ajax({
 				url: '/api/classes/deleteClasse',
 				type: 'POST',
-				data: { 'id': id }
+				data: { 'classe_id': id }
 			}).done(function(data){
 				location.reload();
 			}).fail(function(data){
@@ -206,6 +190,81 @@ const webApp = {
 			}).then((result) => {
 				if(result.isConfirmed){
 					webApp.classes.removeClasse(id);
+				}
+			});
+		}
+	},
+	students: {
+		newStudent(){
+			let _form = '#webAppForm-student';
+			
+			webApp.form.loading.show(_form);
+			
+			webApp.form.error.hide(_form, 0);
+			
+			$.ajax({
+				url: '/api/students/newStudent',
+				type: 'POST',
+				data: $(_form).serialize()
+			}).done(function(data){
+				window.location.href = '/panel/students'
+			}).fail(function(data){
+				webApp.form.error.setMessage(_form, data.responseJSON.message);
+				webApp.form.error.show(_form);
+				
+				webApp.form.loading.hide(_form);
+			});
+		},
+		editStudent(){
+			let _form = '#webAppForm-student';
+			
+			webApp.form.loading.show(_form);
+			
+			webApp.form.error.hide(_form, 0);
+			
+			$.ajax({
+				url: '/api/students/editStudent',
+				type: 'POST',
+				data: $(_form).serialize()
+			}).done(function(data){
+				window.location.href = '/panel/students'
+			}).fail(function(data){
+				webApp.form.error.setMessage(_form, data.responseJSON.message);
+				webApp.form.error.show(_form);
+				
+				webApp.form.loading.hide(_form);
+			});
+		},
+		removeStudent(id){
+			let _form = '#students';
+			
+			webApp.form.loading.show(_form);
+			
+			$.ajax({
+				url: '/api/students/deleteStudent',
+				type: 'POST',
+				data: { 'student_id': id }
+			}).done(function(data){
+				location.reload();
+			}).fail(function(data){
+				Swal.fire('Oops...', data.responseJSON.message, 'error').then((result) => {
+					webApp.form.loading.hide(_form);
+				});
+			});
+		},
+		prepareRemoveStudent(id){
+			Swal.fire({
+				title: 'Você tem certeza?',
+				text: 'Você não poderá reverter isso!',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Sim, exclua!',
+				cancelButtonText: 'Não, cancelar!'
+			}).then((result) => {
+				if(result.isConfirmed){
+					webApp.students.removeStudent(id);
 				}
 			});
 		}

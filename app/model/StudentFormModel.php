@@ -9,7 +9,7 @@ class StudentFormModel extends FormModel {
 	public $genre;
 	
 	public function load($data){
-		$this->name = trim($data['name']);
+		$this->name = ucwords(trim($data['name']));
 		$this->email = trim($data['email']);
 		$this->phone = trim($data['phone']);
 		$this->birthday = trim($data['birthday']);
@@ -35,7 +35,7 @@ class StudentFormModel extends FormModel {
 		} else if(preg_match('/[^a-zA-Z\wÀ-ú ]/', $this->name)){
 			$this->addError('name', 'Nome informado contem caractere invalido!');
 			return false;
-		} else if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
+		} else if(filter_var($this->email, FILTER_VALIDATE_EMAIL) === false){
 			$this->addError('email', 'E-mail informado é inválido!');
 			return false;
 		} else if(!Utils::validatePhone($this->phone)){
@@ -44,7 +44,7 @@ class StudentFormModel extends FormModel {
 		} else if(!preg_match('/^\d{4}-\d{2}-\d{2}$/', $this->birthday)){
 			$this->addError('birthday', 'Data de Nascimento informado é inválido!');
 			return false;
-		} else if((!filter_var($this->genre, FILTER_VALIDATE_INT)) || ($this->genre < 0) || ($this->genre > 1)){
+		} else if((filter_var($this->genre, FILTER_VALIDATE_INT) === false) || ($this->genre < 0) || ($this->genre > 1)){
 			$this->addError('genre', 'Genero informado é inválido!');
 			return false;
 		}

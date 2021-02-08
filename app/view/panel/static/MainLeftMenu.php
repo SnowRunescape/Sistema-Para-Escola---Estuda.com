@@ -12,7 +12,6 @@
 	
 	<div class="buttons">
 		<ul>
-			<a href="/panel/"><li <?php if($panelPage == 'dashboard'){ echo 'class="selected"'; } ?>>Dashboard</li></a>
 			<a href="/panel/schools"><li <?php if($panelPage == 'schools'){ echo 'class="selected"'; } ?>>Escolas</li></a>
 			<a href="/panel/classes"><li <?php if($panelPage == 'classes'){ echo 'class="selected"'; } ?>>Turmas</li></a>
 			<a href="/panel/students"><li <?php if($panelPage == 'students'){ echo 'class="selected"'; } ?>>Alunos</li></a>

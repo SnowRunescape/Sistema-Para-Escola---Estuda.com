@@ -1,18 +1,18 @@
 <?php
-require_once 'controller/Schools.class.php';
+require_once 'controller/Students.class.php';
 
-if(isset($_POST['school_id'])){
-	$schoolID = trim($_POST['school_id']);
+if(isset($_POST['student_id'])){
+	$studentID = trim($_POST['student_id']);
 	
-	$schools = new Schools();
+	$students = new Students();
 	
 	try {
-		$schools->remove($schoolID);
+		$students->remove($studentID);
 		
 		$response = [
 			'status' => 200,
 			'd' => [
-				'message' => 'Escola deletada com sucesso!'
+				'message' => 'Aluno deletado com sucesso!'
 			]
 		];
 	} catch(Exception $e){

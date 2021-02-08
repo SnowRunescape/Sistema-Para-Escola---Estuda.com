@@ -1,5 +1,5 @@
 <?php
-$panelPage = ((isset($params[2])) && (!empty($params[2]))) ? $params[2] : 'dashboard';
+$panelPage = ((isset($params[2])) && (!empty($params[2]))) ? $params[2] : 'schools';
 
 $paramsLocal = "view/panel/{$panelPage}.php";
 

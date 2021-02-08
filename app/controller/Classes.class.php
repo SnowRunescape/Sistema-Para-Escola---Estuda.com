@@ -35,10 +35,10 @@ class Classes {
 	public function all(){
 		$classes = [];
 		
-		$studentsSQL = DB::conn()->prepare('SELECT * FROM classes');
-		$studentsSQL->execute();
+		$classesSQL = DB::conn()->prepare('SELECT * FROM classes');
+		$classesSQL->execute();
 		
-		while($classe = $studentsSQL->fetchObject(Classes::class)){
+		while($classe = $classesSQL->fetchObject(Classes::class)){
 			$schools = new Schools();
 			
 			$classe->school = $schools->find($classe->school_id);
@@ -55,14 +55,15 @@ class Classes {
 	
 	public function register(ClasseFormModel $formModel){
 		$classesSQL = DB::conn()->prepare('INSERT INTO classes
-			(school_id, education_level, series, period) VALUES
-			(:school_id, :education_level, :series, :period)'
+			(school_id, education_level, series, period, year) VALUES
+			(:school_id, :education_level, :series, :period, :year)'
 		);
 		$classesSQL->execute([
 			':school_id' => $formModel->school_id,
 			':education_level' => $formModel->education_level,
 			':series' => $formModel->series,
-			':period' => $formModel->period
+			':period' => $formModel->period,
+			':year' => $formModel->year
 		]);
 		
 		if($classesSQL->rowCount() > 0){
@@ -75,14 +76,15 @@ class Classes {
 	public function edit($id, ClasseFormModel $formModel){
 		$classesSQL = DB::conn()->prepare('UPDATE classes
 			SET school_id = :school_id, education_level = :education_level,
-			series = :series, period = :period WHERE id = :id LIMIT 1'
+			series = :series, period = :period, year = :year WHERE id = :id LIMIT 1'
 		);
 		$classesSQL->execute([
 			':id' => $id,
 			':school_id' => $formModel->school_id,
 			':education_level' => $formModel->education_level,
 			':series' => $formModel->series,
-			':period' => $formModel->period
+			':period' => $formModel->period,
+			':year' => $formModel->year
 		]);
 	}
 	

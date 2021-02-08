@@ -63,8 +63,12 @@
 							
 							<select name="education_level" onchange="educationLevelChange(this);">
 								<option selected disabled hidden>Selecione o Nivel de Ensino</option>
-								<option value="0">Ensino Fundamental</option>
-								<option value="1">Ensino Medio</option>
+								
+								<?php
+									foreach(Classes::EDUCATION_LEVEL as $education_level_key => $education_level_value){
+										echo '<option value="' . $education_level_key . '">' . $education_level_value . '</option>';
+									}
+								?>
 							</select>
 						</div>
 						
@@ -73,18 +77,14 @@
 							
 							<select name="series">
 								<option selected disabled>Selecione a Serie</option>
-								<option value="0" education_level="0" hidden>1° Serie</option>
-								<option value="1" education_level="0" hidden>2° Serie</option>
-								<option value="2" education_level="0" hidden>3° Serie</option>
-								<option value="3" education_level="0" hidden>4° Serie</option>
-								<option value="4" education_level="0" hidden>5° Serie</option>
-								<option value="5" education_level="0" hidden>6° Serie</option>
-								<option value="6" education_level="0" hidden>7° Serie</option>
-								<option value="7" education_level="0" hidden>8° Serie</option>
-								<option value="8" education_level="0" hidden>9° Serie</option>
-								<option value="0" education_level="1" hidden>1° Ano</option>
-								<option value="1" education_level="1" hidden>2° Ano</option>
-								<option value="2" education_level="1" hidden>3° Ano</option>
+								
+								<?php
+									foreach(Classes::SERIES as $education_level => $series){
+										foreach($series as $series_key => $series_value){
+											echo '<option value="' . $series_key . '" education_level="' . $education_level . '" hidden>' . $series_value . '</option>';
+										}
+									}
+								?>
 							</select>
 						</div>
 						
@@ -93,10 +93,19 @@
 							
 							<select name="period">
 								<option selected disabled hidden>Selecione o Periodo</option>
-								<option value="0">Matutino</option>
-								<option value="1">Vespertino</option>
-								<option value="2">Noturno</option>
+								
+								<?php
+									foreach(Classes::PERIOD as $period_key => $period_value){
+										echo '<option value="' . $period_key . '">' . $period_value .'</option>';
+									}
+								?>
 							</select>
+						</div>
+						
+						<div class="field">
+							<label>Ano</label>
+							
+							<input type="number" name="year" value="<?= date('Y'); ?>">
 						</div>
 						
 						<div class="field">
