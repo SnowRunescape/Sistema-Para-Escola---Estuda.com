@@ -399,6 +399,65 @@ form .divisory {
 }
 
 /*
+ * Page Students
+ */
+#students {
+	display:flex;
+	flex-wrap:wrap;
+}
+
+#students .student {
+	display:flex;
+	flex:0 0 100%;
+	padding:8px;
+}
+
+#students .student:not(:first-child) {
+	border-top:solid 1px #eee;
+}
+
+#students .student .image {
+	margin-right:8px;
+	display:flex;
+	flex:0 0 0;
+	align-items:center;
+}
+
+#students .student .image img {
+	width:52px;
+}
+
+#students .student .info {
+	display:flex;
+	flex:1 0 0;
+	color:#333;
+	align-items:center;
+}
+
+#students .student .info p {
+	display:grid;
+	margin:6px;
+}
+
+#students .student .buttons {
+	display:flex;
+	flex:0 0 0;
+	align-items:center;
+}
+
+#students .student .buttons a {
+	margin:0px 6px;
+}
+
+#students .student .buttons img {
+	width:21px;
+}
+
+#webAppForm-student {
+	margin:6px 6px;
+}
+
+/*
  * Box Error
  */
 .webAppBox__error {
