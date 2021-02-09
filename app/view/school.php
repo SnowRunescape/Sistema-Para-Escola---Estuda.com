@@ -1,7 +1,11 @@
 <?php
+require 'controller/Students.class.php';
+require 'controller/Classes.class.php';
+
 $schoolID = ((isset($params[2])) && (!empty($params[2]))) ? $params[2] : null;
 
-$schools = new Schools();
+$students = new Students();
+$classes = new Classes();
 
 $school = $schools->find($schoolID);
 
@@ -18,4 +22,3 @@ if($school){
 } else {
 	require 'view/error/404.php';
 }
-

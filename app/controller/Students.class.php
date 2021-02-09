@@ -30,6 +30,17 @@ class Students {
 		return $students;
 	}
 	
+	public function count($school_id = null){
+		$sql = ($school_id === null) ? 'SELECT count(*) FROM students' : 'SELECT count(*) FROM students WHERE school_id = :school_id';
+		
+		$studentsSQL = DB::conn()->prepare($sql);
+		$studentsSQL->execute([
+			':school_id' => $school_id
+		]);
+		
+		return $studentsSQL->fetchColumn();
+	}
+	
 	public function register(StudentFormModel $formModel){
 		$studentsSQL = DB::conn()->prepare('INSERT INTO students
 			(name, email, phone, birthday, genre, school_id) VALUES

@@ -57,6 +57,17 @@ class Classes {
 		return $classes;
 	}
 	
+	public function count($school_id = null){
+		$sql = ($school_id === null) ? 'SELECT count(*) FROM classes' : 'SELECT count(*) FROM classes WHERE school_id = :school_id';
+		
+		$classesSQL = DB::conn()->prepare($sql);
+		$classesSQL->execute([
+			':school_id' => $school_id
+		]);
+		
+		return $classesSQL->fetchColumn();
+	}
+	
 	public function register(ClasseFormModel $formModel){
 		$classesSQL = DB::conn()->prepare('INSERT INTO classes
 			(school_id, education_level, series, period, year) VALUES
