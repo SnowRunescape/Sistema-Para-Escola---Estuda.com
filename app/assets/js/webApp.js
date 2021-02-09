@@ -57,7 +57,7 @@ const webApp = {
 				type: 'POST',
 				data: $(_form).serialize()
 			}).done(function(data){
-				window.location.href = '/panel/schools'
+				window.location.href = data.redirect;
 			}).fail(function(data){
 				webApp.form.error.setMessage(_form, data.responseJSON.message);
 				webApp.form.error.show(_form);
@@ -77,7 +77,7 @@ const webApp = {
 				type: 'POST',
 				data: $(_form).serialize()
 			}).done(function(data){
-				window.location.href = '/panel/schools'
+				window.location.href = data.redirect;
 			}).fail(function(data){
 				webApp.form.error.setMessage(_form, data.responseJSON.message);
 				webApp.form.error.show(_form);
@@ -132,7 +132,7 @@ const webApp = {
 				type: 'POST',
 				data: $(_form).serialize()
 			}).done(function(data){
-				window.location.href = '/panel/classes'
+				window.location.href = data.redirect;
 			}).fail(function(data){
 				webApp.form.error.setMessage(_form, data.responseJSON.message);
 				webApp.form.error.show(_form);
@@ -152,7 +152,7 @@ const webApp = {
 				type: 'POST',
 				data: $(_form).serialize()
 			}).done(function(data){
-				window.location.href = '/panel/classes'
+				window.location.href = data.redirect;
 			}).fail(function(data){
 				webApp.form.error.setMessage(_form, data.responseJSON.message);
 				webApp.form.error.show(_form);
@@ -207,7 +207,7 @@ const webApp = {
 				type: 'POST',
 				data: $(_form).serialize()
 			}).done(function(data){
-				window.location.href = '/panel/students'
+				window.location.href = data.redirect;
 			}).fail(function(data){
 				webApp.form.error.setMessage(_form, data.responseJSON.message);
 				webApp.form.error.show(_form);
@@ -227,7 +227,7 @@ const webApp = {
 				type: 'POST',
 				data: $(_form).serialize()
 			}).done(function(data){
-				window.location.href = '/panel/students'
+				window.location.href = data.redirect;
 			}).fail(function(data){
 				webApp.form.error.setMessage(_form, data.responseJSON.message);
 				webApp.form.error.show(_form);

@@ -25,10 +25,10 @@
 	</head>
 	
 	<body>
-		<?php include 'view/panel/static/Header.php'; ?>
+		<?php include 'view/static/Header.php'; ?>
 		
 		<main id="webApp-main">
-			<?php include 'view/panel/static/MainLeftMenu.php'; ?>
+			<?php include 'view/static/MainLeftMenu.php'; ?>
 			
 			<div id="webApp-main__container">
 				<div class="title">
@@ -41,29 +41,17 @@
 					<form id="webAppForm-classe" onsubmit="webApp.classes.editClasse();return false;" autocomplete="off">
 						<div class="webAppForm__error"></div>
 						
+						<div class="field hide">
+							<label>ID da Escola</label>
+							
+							<input type="text" name="school_id" value="<?= $schoolID; ?>">
+						</div>
+						
 						<div class="field">
 							<label>Turma</label>
 							
 							<input value="<?= $classe->id ?>" disabled>
 							<input type="hidden" name="classe_id" value="<?= $classe->id ?>">
-						</div>
-						
-						<div class="field">
-							<label>Selecione a Escola</label>
-							
-							<select name="school_id">
-								<option selected disabled hidden>Selecione uma Escola</option>
-								
-								<?php
-									$schools = new Schools();
-									
-									$schoolsList = $schools->all();
-									
-									foreach($schoolsList as $school){
-										echo '<option value="' . $school->id . '" ' . (($school->id == $classe->school->id) ? "selected" : '') . '>'.$school->name.'</option>';
-									}
-								?>
-							</select>
 						</div>
 						
 						<div class="field">

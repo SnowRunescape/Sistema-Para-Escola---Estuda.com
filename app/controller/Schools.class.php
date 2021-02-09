@@ -1,5 +1,10 @@
 <?php
 class Schools {
+	const STATUS = [
+		0 => 'Desativada',
+		1 => 'Ativada'
+	];
+	
 	public function all(){
 		$school = [];
 		
@@ -26,7 +31,7 @@ class Schools {
 			':name' => $formModel->name,
 			':andress' => $formModel->andress,
 			':date' => '0000-00-00',
-			':status' => 1
+			':status' => $formModel->status
 		]);
 		
 		if($studentsSQL->rowCount() > 0){
@@ -38,12 +43,14 @@ class Schools {
 	
 	public function edit($id, SchoolFormModel $formModel){
 		$schoolsSQL = DB::conn()->prepare('UPDATE schools
-			SET name = :name, andress = :andress WHERE id = :id LIMIT 1'
+			SET name = :name, andress = :andress, status = :status,
+			WHERE id = :id LIMIT 1'
 		);
 		$schoolsSQL->execute([
 			':id' => $id,
 			':name' => $formModel->name,
-			':andress' => $formModel->andress
+			':andress' => $formModel->andress,
+			':status' => $formModel->status
 		]);
 	}
 	

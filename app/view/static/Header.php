@@ -4,7 +4,6 @@
 	</div>
 	
 	<div class="menu__right">
-		<a href="/logout"><img src="//minecart.com.br/assets/img/icons/icon-logout.svg"></a>
 		<a class="onlyMobile" onclick="webApp.menu.toggleMenu();"><img src="//minecart.com.br/assets/img/icons/icon-headline.svg"></a>
 	</div>
 </header>

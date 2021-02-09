@@ -14,57 +14,56 @@
 		
 		<script src="/assets/js/jquery.min.js"></script>
 		<script src="/assets/js/webApp.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+		<script src="/assets/js/sweetalert.min.js"></script>
 	</head>
 	
 	<body>
-		<?php include 'view/panel/static/Header.php'; ?>
+		<?php include 'view/static/Header.php'; ?>
 		
 		<main id="webApp-main">
-			<?php include 'view/panel/static/MainLeftMenu.php'; ?>
+			<?php include 'view/static/MainLeftMenu.php'; ?>
 			
 			<div id="webApp-main__container">
 				<div class="title">
-					Alunos
+					Turmas
 				</div>
 				
 				<div class="divisory"></div>
 				
 				<div class="buttons">
-					<a href="/panel/students/new" class="btn btn-success">+ Novo Aluno</a>
+					<a href="/school/<?= $schoolID; ?>/classes/new" class="btn btn-success">+ Nova Turma</a>
 				</div>
 				
 				<div class="content">
-					<div id="students">
+					<div id="classes">
 						<?php
-							$listStudents = $students->all();
+							$listClasses = $classes->all($schoolID);
 							
-							if($listStudents){
-								foreach($listStudents as $row){ ?>
-									<div class="student">
+							if($listClasses){
+								foreach($listClasses as $row){ ?>
+									<div class="classe">
 										<div class="image">
 											<img src="/assets/img/icons/icon-classes.svg">
 										</div>
 										
 										<div class="info">
-											<p><b>Aluno:</b> <?= $row->name; ?></p>
-											<p><b>Escola:</b> <?= $row->school->name; ?></p>
+											<p><b>Turma:</b> <?= $row->id; ?></p>
 										</div>
 										
 										<div class="buttons">
-											<a href="/panel/students/edit/<?= $row->id; ?>"><img src="/assets/img/icons/icon-edit.svg"></a>
-											<a onclick="webApp.students.prepareRemoveStudent(<?= $row->id; ?>)"><img src="/assets/img/icons/icon-delete.svg"></a>
+											<a href="/school/<?= $schoolID; ?>/classes/edit/<?= $row->id; ?>"><img src="/assets/img/icons/icon-edit.svg"></a>
+											<a onclick="webApp.classes.prepareRemoveClasse(<?= $row->id; ?>)"><img src="/assets/img/icons/icon-delete.svg"></a>
 										</div>
 									</div>
 								<?php }
 							} else { ?>
 								<div class="webAppBox__error">
 									<div class="title">
-										Nenhuma Aluno Localizada
+										Nenhuma Turma Localizada
 									</div>
 									
 									<div class="content">
-										Nenhuma aluno cadastrado ate o momento!
+										Nenhuma turma criada ate o momento!
 									</div>
 								</div>
 							<?php }

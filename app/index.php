@@ -2,9 +2,9 @@
 require 'controller/Config.php';
 require 'controller/Utils.class.php';
 require 'controller/Connection.class.php';
-require 'controller/User.class.php';
+require 'controller/Schools.class.php';
 
-$user = new User();
+$schools = new Schools();
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 

@@ -18,7 +18,8 @@ if(isset($_POST['student_id'])){
 			$response = [
 				'status' => 200,
 				'd' => [
-					'message' => 'Informações do aluno modificado com sucesso!'
+					'message' => 'Informações do aluno modificado com sucesso!',
+					'redirect' => "/school/{$formModel->school_id}/students"
 				]
 			];
 		} catch(Exception $e){

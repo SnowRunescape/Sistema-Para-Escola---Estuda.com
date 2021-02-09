@@ -32,11 +32,15 @@ class Classes {
 		2 => 'Noturno'
 	];
 	
-	public function all(){
+	public function all($school_id = null){
 		$classes = [];
 		
-		$classesSQL = DB::conn()->prepare('SELECT * FROM classes');
-		$classesSQL->execute();
+		$sql = ($school_id === null) ? 'SELECT * FROM classes' : 'SELECT * FROM classes WHERE school_id = :school_id';
+		
+		$classesSQL = DB::conn()->prepare($sql);
+		$classesSQL->execute([
+			':school_id' => $school_id
+		]);
 		
 		while($classe = $classesSQL->fetchObject(Classes::class)){
 			$schools = new Schools();

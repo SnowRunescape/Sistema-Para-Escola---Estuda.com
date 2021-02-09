@@ -11,31 +11,26 @@
 		
 		<link rel="stylesheet" href="/assets/css/panel.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" async>
+		
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/webApp.js"></script>
 	</head>
 	
 	<body>
-		<?php include 'view/panel/static/Header.php'; ?>
+		<?php include 'view/static/Header.php'; ?>
 		
 		<main id="webApp-main">
-			<?php include 'view/panel/static/MainLeftMenu.php'; ?>
+			<?php include 'view/static/MainLeftMenu.php'; ?>
 			
 			<div id="webApp-main__container">
 				<div class="title">
-					404 Not Found
+					Dashboard
 				</div>
 				
 				<div class="divisory"></div>
 				
 				<div class="content">
-					<div class="webAppBox__error">
-						<div class="title">
-							Not Found
-						</div>
-						
-						<div class="content">
-							A pagina que você está tentando acessar não existe!
-						</div>
-					</div>
+					EM BREVE
 				</div>
 			</div>
 		</main>

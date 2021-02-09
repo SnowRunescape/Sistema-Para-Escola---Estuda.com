@@ -10,15 +10,14 @@ if(isset($_POST['classe_id'])){
 	$classeID = trim($_POST['classe_id']);
 	
 	if($formModel->validate()){
-		$classes = new Classes();
-		
 		try {
 			$classes->edit($classeID, $formModel);
 			
 			$response = [
 				'status' => 200,
 				'd' => [
-					'message' => 'Informações da turma modificada com sucesso!'
+					'message' => 'Informações da turma modificada com sucesso!',
+					'redirect' => "/school/{$formModel->school_id}/classes"
 				]
 			];
 		} catch(Exception $e){

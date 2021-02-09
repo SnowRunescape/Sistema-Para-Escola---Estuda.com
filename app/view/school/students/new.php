@@ -17,10 +17,10 @@
 	</head>
 	
 	<body>
-		<?php include 'view/panel/static/Header.php'; ?>
+		<?php include 'view/static/Header.php'; ?>
 		
 		<main id="webApp-main">
-			<?php include 'view/panel/static/MainLeftMenu.php'; ?>
+			<?php include 'view/static/MainLeftMenu.php'; ?>
 			
 			<div id="webApp-main__container">
 				<div class="title">
@@ -32,6 +32,12 @@
 				<div class="content">
 					<form id="webAppForm-student" onsubmit="webApp.students.newStudent();return false;" autocomplete="off">
 						<div class="webAppForm__error"></div>
+						
+						<div class="field hide">
+							<label>ID da Escola</label>
+							
+							<input type="text" name="school_id" value="<?= $schoolID; ?>">
+						</div>
 						
 						<div class="field">
 							<label>Nome</label>

@@ -7,6 +7,7 @@ class StudentFormModel extends FormModel {
 	public $phone;
 	public $birthday;
 	public $genre;
+	public $school_id;
 	
 	public function load($data){
 		$this->name = ucwords(trim($data['name']));
@@ -14,9 +15,12 @@ class StudentFormModel extends FormModel {
 		$this->phone = trim($data['phone']);
 		$this->birthday = trim($data['birthday']);
 		$this->genre = trim($data['genre']);
+		$this->school_id = trim($data['school_id']);
 	}
 	
 	public function validate(){
+		$schools = new Schools();
+		
 		if(strlen($this->name) == 0){
 			$this->addError('name', 'Informe o Nome do aluno.');
 			return false;
@@ -32,6 +36,9 @@ class StudentFormModel extends FormModel {
 		} else if(strlen($this->genre) == 0){
 			$this->addError('genre', 'Informe o Gênero do aluno.');
 			return false;
+		} else if(strlen($this->school_id) == 0){
+			$this->addError('school_id', 'Informe o ID da Escola.');
+			return false;
 		} else if(preg_match('/[^a-zA-Z\wÀ-ú ]/', $this->name)){
 			$this->addError('name', 'Nome informado contem caractere invalido!');
 			return false;
@@ -44,8 +51,11 @@ class StudentFormModel extends FormModel {
 		} else if(!preg_match('/^\d{4}-\d{2}-\d{2}$/', $this->birthday)){
 			$this->addError('birthday', 'Data de Nascimento informado é inválido!');
 			return false;
-		} else if((filter_var($this->genre, FILTER_VALIDATE_INT) === false) || ($this->genre < 0) || ($this->genre > 1)){
-			$this->addError('genre', 'Genero informado é inválido!');
+		} else if(!array_key_exists($this->genre, Students::GENRE)){
+			$this->addError('genre', 'Genero informado é invalido.');
+			return false;
+		} else if($schools->find($this->school_id) === false){
+			$this->addError('school_id', 'ID da Escola informado é invalido.');
 			return false;
 		}
 		

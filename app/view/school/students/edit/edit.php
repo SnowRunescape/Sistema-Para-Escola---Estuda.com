@@ -25,10 +25,10 @@
 	</head>
 	
 	<body>
-		<?php include 'view/panel/static/Header.php'; ?>
+		<?php include 'view/static/Header.php'; ?>
 		
 		<main id="webApp-main">
-			<?php include 'view/panel/static/MainLeftMenu.php'; ?>
+			<?php include 'view/static/MainLeftMenu.php'; ?>
 			
 			<div id="webApp-main__container">
 				<div class="title">
@@ -42,10 +42,11 @@
 						<div class="webAppForm__error"></div>
 						
 						<div class="field">
-							<label>ID</label>
+							<label>ID do Aluno</label>
 							
 							<input type="text" value="<?= $student->id; ?>" disabled>
 							<input type="hidden" name="student_id" value="<?= $student->id; ?>">
+							<input type="hidden" name="school_id" value="<?= $student->school_id; ?>">
 						</div>
 						
 						<div class="field">

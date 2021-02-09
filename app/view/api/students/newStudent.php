@@ -14,7 +14,8 @@ if($formModel->validate()){
 			$response = [
 				'status' => 200,
 				'd' => [
-					'message' => 'Aluno cadastrado com sucesso!'
+					'message' => 'Aluno cadastrado com sucesso!',
+					'redirect' => "/school/{$formModel->school_id}/students"
 				]
 			];
 		} else {

@@ -64,7 +64,7 @@
 #webApp-main {
 	display:flex;
 	background-color:#f0eff6;
-	height:100%;
+	min-height:calc(100% - 60px);
 }
 
 #webApp-main__menu {
@@ -139,7 +139,13 @@
 	padding:16px;
 }
 
-#webApp-main__container > .title{
+#webApp-main__container > .description {
+	margin:12px 0px;
+	font-size:15px;
+	color:#333;
+}
+
+#webApp-main__container > .title {
 	font-size:32px;
     font-weight:600;
     color:#333;
@@ -221,6 +227,10 @@
 /*
  * Sistema de Form
  */
+form .field.hide {
+	display:none;
+}
+
 form .field label {
 	display:block;
 	color:#333;
@@ -282,6 +292,107 @@ form .field:not(:first-of-type){
 form .divisory {
 	border-top:solid 1px #e3e3e3;
 	margin:12px 0;
+}
+
+/*
+ * Page Initial
+ */
+#webAppBox-schools {
+	padding:0px !important;
+}
+
+#webAppBox-schools .title {
+	padding:12px;
+	color:#333;
+	font-size:26px;
+	font-weight:600;
+	border-bottom:solid 1px #eaeaea;
+}
+
+#webAppBox-schools .content {
+	padding:12px;
+}
+
+#webAppBox-newSchool {
+	margin-top:12px;
+}
+
+.webAppBox-school {
+	position:relative;
+	padding:8px 0px;
+}
+
+.webAppBox-school .image {
+	display:inline-block;
+	vertical-align:middle;
+}
+
+.webAppBox-school .image .status {
+	position:absolute;
+	width:20px;
+	height:20px;
+	border-radius:50%;
+	background-color:#eee;
+	margin-top:-15px;
+	margin-left:40px;
+}
+
+.webAppBox-school .image .status.status-active {
+	background-color:#26de81;
+	animation:pulse-active 2s infinite;
+}
+
+.webAppBox-school .image .status.status-notActive {
+	background-color:#ff5252;
+}
+
+.webAppBox-school .image img {
+	width:54px;
+}
+
+.webAppBox-school .info {
+	display:inline-block;
+	margin-left:12px;
+	vertical-align:middle;
+}
+
+.webAppBox-school .info a {
+	color:#333;
+	font-weight:600;
+	text-decoration:none;
+}
+
+.webAppBox-school .buttons {
+	position:absolute;
+	right:0px;
+	top:50%;
+	transform:translate(0px, -50%);
+}
+
+.webAppBox-school .buttons img {
+	width:34px;
+	cursor:pointer;
+}
+
+.webAppBox-school:not(:first-of-type) {
+	border-top:1px dashed #ebedf0;
+}
+
+@keyframes pulse-active {
+	0% {
+		transform: scale(0.9);
+		box-shadow: 0 0 0 0 rgba(38, 223, 130, .7);
+	}
+
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 10px rgba(38, 223, 130, 0);
+	}
+
+	100% {
+		transform: scale(0.9);
+		box-shadow: 0 0 0 0 rgba(38, 223, 130, 0);
+	}
 }
 
 /*

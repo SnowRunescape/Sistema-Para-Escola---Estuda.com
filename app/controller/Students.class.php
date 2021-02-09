@@ -5,11 +5,15 @@ class Students {
 		1 => 'Feminino'
 	];
 	
-	public function all(){
+	public function all($school_id = null){
 		$students = [];
 		
-		$studentsSQL = DB::conn()->prepare('SELECT * FROM students');
-		$studentsSQL->execute();
+		$sql = ($school_id === null) ? 'SELECT * FROM students' : 'SELECT * FROM students WHERE school_id = :school_id';
+		
+		$studentsSQL = DB::conn()->prepare($sql);
+		$studentsSQL->execute([
+			':school_id' => $school_id
+		]);
 		
 		while($student = $studentsSQL->fetchObject(Students::class)){
 			//$schools = new Schools();
@@ -28,15 +32,16 @@ class Students {
 	
 	public function register(StudentFormModel $formModel){
 		$studentsSQL = DB::conn()->prepare('INSERT INTO students
-			(name, email, phone, birthday, genre) VALUES
-			(:name, :email, :phone, :birthday, :genre)'
+			(name, email, phone, birthday, genre, school_id) VALUES
+			(:name, :email, :phone, :birthday, :genre, :school_id)'
 		);
 		$studentsSQL->execute([
 			':name' => $formModel->name,
 			':email' => $formModel->email,
 			':phone' => $formModel->phone,
 			':birthday' => $formModel->birthday,
-			':genre' => $formModel->genre
+			':genre' => $formModel->genre,
+			':school_id' => $formModel->school_id
 		]);
 		
 		if($studentsSQL->rowCount() > 0){

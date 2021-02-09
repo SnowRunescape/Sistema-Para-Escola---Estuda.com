@@ -7,14 +7,13 @@ $formModel = new ClasseFormModel();
 $formModel->load($_POST);
 
 if($formModel->validate()){
-	$classes = new Classes();
-	
 	try {
 		if($classes->register($formModel)){
 			$response = [
 				'status' => 200,
 				'd' => [
-					'message' => 'Turma cadastrada com sucesso!'
+					'message' => 'Turma cadastrada com sucesso!',
+					'redirect' => "/school/{$formModel->school_id}/classes"
 				]
 			];
 		} else {

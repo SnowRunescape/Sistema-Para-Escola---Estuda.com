@@ -14,14 +14,13 @@
 		
 		<script src="/assets/js/jquery.min.js"></script>
 		<script src="/assets/js/webApp.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	</head>
 	
 	<body>
-		<?php include 'view/panel/static/Header.php'; ?>
+		<?php include 'view/static/Header.php'; ?>
 		
 		<main id="webApp-main">
-			<?php include 'view/panel/static/MainLeftMenu.php'; ?>
-			
 			<div id="webApp-main__container">
 				<div class="title">
 					Nova Escola
@@ -29,7 +28,7 @@
 				
 				<div class="divisory"></div>
 				
-				<div class="content">
+				<div id="webAppBox-newSchool" class="content">
 					<form id="webAppForm-school" onsubmit="webApp.school.newSchool();return false;" autocomplete="off">
 						<div class="webAppForm__error"></div>
 						
@@ -41,6 +40,20 @@
 						<div class="field">
 							<label>Endereço da Escola</label>
 							<input type="text" name="andress" placeholder="Endereço da Escola">
+						</div>
+						
+						<div class="field">
+							<label>Situação</label>
+							
+							<select name="status">
+								<option selected disabled hidden>Selecione a Situação da Escola</option>
+								
+								<?php
+									foreach(Schools::STATUS as $status_key => $status_value){
+										echo '<option value="' . $status_key . '">' . $status_value .'</option>';
+									}
+								?>
+							</select>
 						</div>
 						
 						<div class="field">

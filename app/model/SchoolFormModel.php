@@ -8,6 +8,7 @@ class SchoolFormModel extends FormModel {
 	public function load($data){
 		$this->name = trim($data['name']);
 		$this->andress = trim($data['andress']);
+		$this->status = trim($data['status']);
 	}
 	
 	public function validate(){
@@ -15,7 +16,10 @@ class SchoolFormModel extends FormModel {
 			$this->addError('name', 'Informe o Nome da Escola.');
 			return false;
 		} else if(strlen($this->andress) == 0){
-			$this->addError('email', 'Informe o Endereço da Escola.');
+			$this->addError('andress', 'Informe o Endereço da Escola.');
+			return false;
+		} else if(!array_key_exists($this->status, Schools::STATUS)){
+			$this->addError('status', 'Situação da Escola informado é invalido.');
 			return false;
 		}
 		
