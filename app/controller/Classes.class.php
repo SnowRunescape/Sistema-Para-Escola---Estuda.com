@@ -1,4 +1,5 @@
 <?php
+require_once 'controller/ClassStudents.class.php';
 require_once 'controller/Schools.class.php';
 
 class Classes {
@@ -46,6 +47,7 @@ class Classes {
 			$schools = new Schools();
 			
 			$classe->school = $schools->find($classe->school_id);
+			$classe->students = ClassStudents::getStudents($classe->id);
 			
 			$classes[] = $classe;
 		}

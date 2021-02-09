@@ -35,6 +35,15 @@
 				</div>
 				
 				<div class="content">
+					<div id="search">
+						<form id="webAppForm-search">
+							<div class="field field-group">
+								<input type="text" placeholder="Pesquisar...">
+								<input type="submit" class="btn btn-primary" value="Buscar">
+							</div>
+						</form>
+					</div>
+					
 					<div id="students">
 						<?php
 							$listStudents = $students->all($schoolID);

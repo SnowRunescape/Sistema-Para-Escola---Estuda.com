@@ -35,6 +35,15 @@
 				</div>
 				
 				<div class="content">
+					<div id="search">
+						<form id="webAppForm-search">
+							<div class="field field-group">
+								<input type="text" placeholder="Pesquisar...">
+								<input type="submit" class="btn btn-primary" value="Buscar">
+							</div>
+						</form>
+					</div>
+					
 					<div id="classes">
 						<?php
 							$listClasses = $classes->all($schoolID);
@@ -48,6 +57,7 @@
 										
 										<div class="info">
 											<p><b>Turma:</b> <?= $row->id; ?></p>
+											<p><b>Alunos:</b> <?= count($row->students); ?></p>
 										</div>
 										
 										<div class="buttons">

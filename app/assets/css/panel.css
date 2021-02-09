@@ -11,6 +11,10 @@
 	margin:0px auto;
 }
 
+#search {
+	margin:8px 8px 12px 8px;
+}
+
 /*
  * Header Panel
  */
@@ -224,6 +228,15 @@
 	background:#2ab64f;
 }
 
+.btn.btn-primary {
+	background:#0878dd;
+	color:#fff;
+}
+
+.btn.btn-primary:hover {
+	background:#0b5ea9;
+}
+
 /*
  * Sistem de Form
  */
@@ -254,6 +267,20 @@ form .field select {
 	padding:8px;
 	color:#333;
 	outline:none;
+}
+
+form .field.field-group {
+	display:flex;
+}
+
+form .field.field-group input:nth-child(1){
+	width:100%;
+	border-radius:5px 0px 0px 5px;
+	border-right:none;
+}
+
+form .field.field-group input:nth-child(2){
+	border-radius:0px 5px 5px 0px;
 }
 
 form .field:not(:first-of-type){
