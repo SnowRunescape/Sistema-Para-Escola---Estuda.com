@@ -18,7 +18,8 @@ if(isset($_POST['id'])){
 			$response = [
 				'status' => 200,
 				'd' => [
-					'message' => 'Informações da escola modificada com sucesso!'
+					'message' => 'Informações da escola modificada com sucesso!',
+					'redirect' => '/'
 				]
 			];
 		} catch(Exception $e){
