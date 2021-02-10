@@ -1,7 +1,9 @@
 <?php
+require_once 'controller/Classes.class.php';
+
 $classesPage = (isset($params[3])) ? $params[3] : null;
 
-$paramsLocal = __DIR__ . "/classes/{$classesPage}.php";
+$paramsLocal = "view/api/classes/{$classesPage}.php";
 
 $classes = new Classes();
 

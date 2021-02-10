@@ -29,6 +29,10 @@
 				
 				<div class="divisory"></div>
 				
+				<div class="buttons">
+					<a href="/school/<?= $schoolID; ?>/school/edit" class="btn btn-success">Editar Escola</a>
+				</div>
+				
 				<div id="dashboard-info" class="content">
 					<div class="info">
 						<p>Numero de Alunos</p>

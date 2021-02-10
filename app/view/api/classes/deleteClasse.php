@@ -1,6 +1,4 @@
 <?php
-require_once 'controller/Classes.class.php';
-
 if(isset($_POST['classe_id'])){
 	$classeID = trim($_POST['classe_id']);
 	

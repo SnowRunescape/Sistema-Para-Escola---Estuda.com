@@ -44,7 +44,7 @@ const webApp = {
 			}
 		}
 	},
-	school: {
+	schools: {
 		newSchool(){
 			let _form = '#webAppForm-school';
 			
@@ -95,7 +95,7 @@ const webApp = {
 				type: 'POST',
 				data: { 'school_id': id }
 			}).done(function(data){
-				location.reload();
+				window.location.href = '/';
 			}).fail(function(data){
 				Swal.fire('Oops...', data.responseJSON.message, 'error').then((result) => {
 					webApp.form.loading.hide(_form);
@@ -114,7 +114,7 @@ const webApp = {
 				cancelButtonText: 'Não, cancelar!'
 			}).then((result) => {
 				if(result.isConfirmed){
-					webApp.school.removeSchool(id);
+					webApp.schools.removeSchool(id);
 				}
 			});
 		}

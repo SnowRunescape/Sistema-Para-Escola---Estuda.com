@@ -14,32 +14,43 @@
 		
 		<script src="/assets/js/jquery.min.js"></script>
 		<script src="/assets/js/webApp.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+		<script src="/assets/js/sweetalert.min.js"></script>
 	</head>
 	
 	<body>
 		<?php include 'view/static/Header.php'; ?>
 		
 		<main id="webApp-main">
+			<?php include 'view/static/MainLeftMenu.php'; ?>
+			
 			<div id="webApp-main__container">
 				<div class="title">
-					Nova Escola
+					Editando Escola
 				</div>
 				
 				<div class="divisory"></div>
 				
-				<div id="webAppBox-newSchool" class="content">
-					<form id="webAppForm-school" onsubmit="webApp.schools.newSchool();return false;" autocomplete="off">
+				<div class="buttons">
+					<button class="btn btn-danger" onclick="webApp.schools.prepareRemoveSchool(<?= $school->id; ?>)">Deletar Escola</button>
+				</div>
+				
+				<div class="content">
+					<form id="webAppForm-school" onsubmit="webApp.schools.editSchool();return false;" autocomplete="off">
 						<div class="webAppForm__error"></div>
+						
+						<div class="field hide">
+							<label>ID da Escola</label>
+							<input type="text" name="id" placeholder="Nome da Escola" value="<?= $school->id; ?>">
+						</div>
 						
 						<div class="field">
 							<label>Nome da Escola</label>
-							<input type="text" name="name" placeholder="Nome da Escola">
+							<input type="text" name="name" placeholder="Nome da Escola" value="<?= htmlspecialchars($school->name); ?>">
 						</div>
 						
 						<div class="field">
 							<label>Endereço da Escola</label>
-							<input type="text" name="andress" placeholder="Endereço da Escola">
+							<input type="text" name="andress" placeholder="Endereço da Escola" value="<?= $school->andress; ?>">
 						</div>
 						
 						<div class="field">
@@ -50,7 +61,11 @@
 								
 								<?php
 									foreach(Schools::STATUS as $status_key => $status_value){
-										echo '<option value="' . $status_key . '">' . $status_value .'</option>';
+										if($school->status == $status_key){
+											echo '<option value="' . $status_key . '" selected>' . $status_value .'</option>';
+										} else {
+											echo '<option value="' . $status_key . '">' . $status_value .'</option>';
+										}
 									}
 								?>
 							</select>

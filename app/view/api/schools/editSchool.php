@@ -1,6 +1,4 @@
 <?php
-require_once 'controller/Schools.class.php';
-
 require_once 'model/SchoolFormModel.php';
 
 $formModel = new SchoolFormModel();
@@ -10,8 +8,6 @@ if(isset($_POST['id'])){
 	$schoolID = trim($_POST['id']);
 	
 	if($formModel->validate()){
-		$schools = new Schools();
-		
 		try {
 			$schools->edit($schoolID, $formModel);
 			
@@ -19,7 +15,7 @@ if(isset($_POST['id'])){
 				'status' => 200,
 				'd' => [
 					'message' => 'Informações da escola modificada com sucesso!',
-					'redirect' => '/'
+					'redirect' => "/school/{$schoolID}/"
 				]
 			];
 		} catch(Exception $e){

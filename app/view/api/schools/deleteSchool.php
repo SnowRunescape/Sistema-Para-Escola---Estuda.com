@@ -1,10 +1,6 @@
 <?php
-require_once 'controller/Schools.class.php';
-
 if(isset($_POST['school_id'])){
 	$schoolID = trim($_POST['school_id']);
-	
-	$schools = new Schools();
 	
 	try {
 		$schools->remove($schoolID);

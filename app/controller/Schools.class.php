@@ -43,7 +43,7 @@ class Schools {
 	
 	public function edit($id, SchoolFormModel $formModel){
 		$schoolsSQL = DB::conn()->prepare('UPDATE schools
-			SET name = :name, andress = :andress, status = :status,
+			SET name = :name, andress = :andress, status = :status
 			WHERE id = :id LIMIT 1'
 		);
 		$schoolsSQL->execute([

@@ -219,6 +219,11 @@
 	background:#bbc3c7;
 }
 
+.btn img {
+	width:20px;
+	vertical-align:middle;
+}
+
 .btn.btn-success {
 	background:#28a745;
 	color:#fff;
@@ -235,6 +240,15 @@
 
 .btn.btn-primary:hover {
 	background:#0b5ea9;
+}
+
+.btn.btn-danger {
+	background:#e74c3c;
+	color:#fff;
+}
+
+.btn.btn-danger:hover {
+	background:#c0392b;
 }
 
 /*
@@ -380,6 +394,7 @@ form .divisory {
 .webAppBox-school .info {
 	display:inline-block;
 	margin-left:12px;
+	max-width:calc(100% - 108px);
 	vertical-align:middle;
 }
 

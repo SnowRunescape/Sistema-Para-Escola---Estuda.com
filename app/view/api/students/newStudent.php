@@ -1,14 +1,10 @@
 <?php
-require_once 'controller/Students.class.php';
-
 require_once 'model/StudentFormModel.php';
 
 $formModel = new StudentFormModel();
 $formModel->load($_POST);
 
 if($formModel->validate()){
-	$students = new Students();
-	
 	try {
 		if($students->register($formModel)){
 			$response = [

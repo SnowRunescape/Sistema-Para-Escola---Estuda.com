@@ -23,10 +23,6 @@ class Students {
 			$students[] = $student;
 		}
 		
-		if(count($students) == 0){
-			return false;
-		}
-		
 		return $students;
 	}
 	

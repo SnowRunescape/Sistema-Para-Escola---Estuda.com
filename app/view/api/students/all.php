@@ -1,16 +1,12 @@
 <?php
-require_once 'controller/Students.class.php';
-
-if(isset($_POST['student_id'])){
-	$studentID = trim($_POST['student_id']);
+if(isset($_POST['school_id'])){
+	$schoolID = trim($_POST['school_id']);
 	
 	try {
-		$students->remove($studentID);
-		
 		$response = [
 			'status' => 200,
 			'd' => [
-				'message' => 'Aluno deletado com sucesso!'
+				'students' => $students->all($schoolID)
 			]
 		];
 	} catch(Exception $e){

@@ -1,6 +1,4 @@
 <?php
-require_once 'controller/Classes.class.php';
-
 require_once 'model/ClasseFormModel.php';
 
 $formModel = new ClasseFormModel();

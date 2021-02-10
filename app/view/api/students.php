@@ -1,7 +1,11 @@
 <?php
+require_once 'controller/Students.class.php';
+
 $studentsPage = (isset($params[3])) ? $params[3] : null;
 
-$paramsLocal = __DIR__ . "/students/{$studentsPage}.php";
+$paramsLocal = "view/api/students/{$studentsPage}.php";
+
+$students = new Students();
 
 if(file_exists($paramsLocal)){
 	require $paramsLocal;
