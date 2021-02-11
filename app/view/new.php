@@ -49,8 +49,8 @@
 						</div>
 						
 						<div class="field">
-							<label>Endereço</label>
-							<input type="text" name="andress" placeholder="Numero">
+							<label>Numero</label>
+							<input type="text" name="number" placeholder="Numero">
 						</div>
 						
 						<div class="field">
