@@ -37,6 +37,10 @@
 				
 				<div class="divisory"></div>
 				
+				<div class="buttons">
+					<a href="/school/<?= $schoolID; ?>/classes/edit/<?= $classe->id ?>/list" class="btn btn-success">Lista de Alunos</a>
+				</div>
+				
 				<div class="content">
 					<form id="webAppForm-classe" onsubmit="webApp.classes.editClasse();return false;" autocomplete="off">
 						<div class="webAppForm__error"></div>

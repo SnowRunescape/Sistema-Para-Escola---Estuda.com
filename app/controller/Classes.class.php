@@ -3,6 +3,10 @@ require_once 'controller/ClassStudents.class.php';
 require_once 'controller/Schools.class.php';
 
 class Classes {
+	/*
+	 * Variaveis constantes responsaveis por definir o conteudo
+	 * e filtrar os dados que estão sendo enviado dos formularios
+	 */
 	const EDUCATION_LEVEL = [
 		0 => 'Ensino Fundamental',
 		1 => 'Ensino Medio'
@@ -33,6 +37,11 @@ class Classes {
 		2 => 'Noturno'
 	];
 	
+	/*
+	 * Retorna todas as Turmas de uma Escola especifica
+	 * @param Integer $school_id
+	 * @return Array
+	 */
 	public function all($school_id = null){
 		$classes = [];
 		
@@ -43,7 +52,7 @@ class Classes {
 			':school_id' => $school_id
 		]);
 		
-		while($classe = $classesSQL->fetchObject(Classes::class)){
+		while($classe = $classesSQL->fetch(PDO::FETCH_OBJ)){
 			$schools = new Schools();
 			
 			$classe->school = $schools->find($classe->school_id);
@@ -59,6 +68,11 @@ class Classes {
 		return $classes;
 	}
 	
+	/*
+	 * Retorna o numero de Turmas de uma Escola especifica
+	 * @param Integer $school_id
+	 * @return Integer
+	 */
 	public function count($school_id = null){
 		$sql = ($school_id === null) ? 'SELECT count(*) FROM classes' : 'SELECT count(*) FROM classes WHERE school_id = :school_id';
 		
@@ -70,6 +84,11 @@ class Classes {
 		return $classesSQL->fetchColumn();
 	}
 	
+	/*
+	 * Metodo responsavel por registrar uma nova Turma
+	 * @param ClasseFormModel $formModel
+	 * @return Boolean
+	 */
 	public function register(ClasseFormModel $formModel){
 		$classesSQL = DB::conn()->prepare('INSERT INTO classes
 			(school_id, education_level, series, period, year) VALUES
@@ -90,6 +109,12 @@ class Classes {
 		return false;
 	}
 	
+	/*
+	 * Metodo responsavel por editar uma Turma
+	 * @param Integer $id
+	 * @param ClasseFormModel $formModel
+	 * @return Void
+	 */
 	public function edit($id, ClasseFormModel $formModel){
 		$classesSQL = DB::conn()->prepare('UPDATE classes
 			SET school_id = :school_id, education_level = :education_level,
@@ -105,6 +130,11 @@ class Classes {
 		]);
 	}
 	
+	/*
+	 * Retorna uma Turma especifica
+	 * @param Integer $id
+	 * @return Object
+	 */
 	public function find($id){
 		$classesSQL = DB::conn()->prepare('SELECT * FROM classes WHERE id = :id LIMIT 1');
 		$classesSQL->execute([
@@ -112,11 +142,12 @@ class Classes {
 		]);
 		
 		if($classesSQL->rowCount() > 0){
-			$classe = $classesSQL->fetchObject(Classes);
+			$classe = $classesSQL->fetch(PDO::FETCH_OBJ);
 			
 			$schools = new Schools();
 			
 			$classe->school = $schools->find($classe->school_id);
+			$classe->students = ClassStudents::getStudents($classe->id);
 			
 			return $classe;
 		}
@@ -124,13 +155,66 @@ class Classes {
 		return false;
 	}
 	
+	/*
+	 * Deleta uma Turma especifica
+	 * @param Integer $id
+	 * @return Boolean
+	 */
 	public function remove($id){
-		$schoolsSQL = DB::conn()->prepare('DELETE FROM classes WHERE id = :id LIMIT 1');
-		$schoolsSQL->execute([
+		$classesSQL = DB::conn()->prepare('DELETE FROM classes WHERE id = :id LIMIT 1');
+		$classesSQL->execute([
 			':id' => $id
 		]);
 		
-		if($schoolsSQL->rowCount() > 0){
+		if($classesSQL->rowCount() > 0){
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/*
+	 * Adiciona uma aluno de uma turma especifica
+	 * @param Integer $class_id
+	 * @param Integer $student_id
+	 * @return Boolean
+	 */
+	public function addStudent($class_id, $student_id){
+		/* 
+		 * FALTA IMPLEMENTAR UMA FUNÇÃO PARA VERIFICAR SE O ALUNO
+		 * JÁ ESTA CADASTRADO NA TURMA EM QUESTÃO
+		 */
+		$classesSQL = DB::conn()->prepare('INSERT INTO classes_students	
+			(student, class) VALUES (:student, :class)'
+		);
+		$classesSQL->execute([
+			':student' => $student_id,
+			':class' => $class_id
+		]);
+		
+		if($classesSQL->rowCount() > 0){
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/*
+	 * Deleta uma aluno de uma turma especifica
+	 * @param Integer $class_id
+	 * @param Integer $student_id
+	 * @return Boolean
+	 */
+	public function removeStudent($class_id, $student_id){
+		$classesSQL = DB::conn()->prepare('DELETE FROM classes_students WHERE
+			student = :student AND class = :class LIMIT 1'
+		);
+		$classesSQL->execute([
+			':student' => $student_id,
+			':class' => $class_id
+		]);
+		
+		if($classesSQL->rowCount() > 0){
 			return true;
 		}
 		

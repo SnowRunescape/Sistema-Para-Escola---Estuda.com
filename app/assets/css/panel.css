@@ -285,10 +285,14 @@ form .field select {
 
 form .field.field-group {
 	display:flex;
+	flex-wrap:wrap;
+}
+
+form .field.field-group label {
+	width:100%;
 }
 
 form .field.field-group input:nth-child(1){
-	width:100%;
 	border-radius:5px 0px 0px 5px;
 	border-right:none;
 }
@@ -515,6 +519,7 @@ form .divisory {
 
 #schools .school .buttons img {
 	width:21px;
+	cursor:pointer;
 }
 
 #webAppForm-school {
@@ -574,6 +579,7 @@ form .divisory {
 
 #classes .classe .buttons img {
 	width:21px;
+	cursor:pointer;
 }
 
 #webAppForm-classe {
@@ -633,6 +639,7 @@ form .divisory {
 
 #students .student .buttons img {
 	width:21px;
+	cursor:pointer;
 }
 
 #webAppForm-student {

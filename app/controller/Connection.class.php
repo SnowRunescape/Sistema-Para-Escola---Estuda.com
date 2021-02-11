@@ -1,7 +1,14 @@
 <?php
 class DB {
+	/*
+	 * Conexão com o mysql
+	 */
 	private static $connection;
 	
+	/*
+	 * Retorna a conexão com o mysql
+	 * @return PDO
+	 */
 	public static function conn(){
 		try {
 			if(is_null(self::$connection)){

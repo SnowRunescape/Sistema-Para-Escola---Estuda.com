@@ -1,5 +1,10 @@
 <?php
 class Utils {
+	/*
+	 * Metodo responsavel validar um Telefone
+	 * @param String $phone
+	 * @return Boolean
+	 */
 	public static function validatePhone($phone){
 		$phone = preg_replace('/[()]/', '', $phone);
 		

@@ -10,7 +10,7 @@ class StudentFormModel extends FormModel {
 	public $school_id;
 	
 	public function load($data){
-		$this->name = ucwords(trim($data['name']));
+		$this->name = ucwords(strtolower(trim($data['name'])));
 		$this->email = trim($data['email']);
 		$this->phone = trim($data['phone']);
 		$this->birthday = trim($data['birthday']);

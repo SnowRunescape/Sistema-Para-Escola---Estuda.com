@@ -37,9 +37,20 @@
 							<input type="text" name="name" placeholder="Nome da Escola">
 						</div>
 						
-						<div class="field">
-							<label>Endereço da Escola</label>
+						<div class="field field-group">
+							<label>CEP</label>
 							<input type="text" name="andress" placeholder="Endereço da Escola">
+							<input type="button" class="btn btn-primary" value="Buscar" onclick="">
+						</div>
+						
+						<div class="field">
+							<label>Endereço</label>
+							<input type="text" name="andress" placeholder="Endereço">
+						</div>
+						
+						<div class="field">
+							<label>Endereço</label>
+							<input type="text" name="andress" placeholder="Numero">
 						</div>
 						
 						<div class="field">

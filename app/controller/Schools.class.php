@@ -1,10 +1,18 @@
 <?php
 class Schools {
+	/*
+	 * Variaveis constantes responsaveis por definir o conteudo
+	 * e filtrar os dados que estão sendo enviado dos formularios
+	 */
 	const STATUS = [
 		0 => 'Desativada',
 		1 => 'Ativada'
 	];
 	
+	/*
+	 * Retorna todas as Escolas
+	 * @return Array
+	 */
 	public function all(){
 		$school = [];
 		
@@ -22,6 +30,11 @@ class Schools {
 		return $school;
 	}
 	
+	/*
+	 * Metodo responsavel por registrar uma nova Escola
+	 * @param SchoolFormModel $formModel
+	 * @return Boolean
+	 */
 	public function register(SchoolFormModel $formModel){
 		$studentsSQL = DB::conn()->prepare('INSERT INTO schools
 			(name, andress, date, status) VALUES
@@ -41,6 +54,12 @@ class Schools {
 		return false;
 	}
 	
+	/*
+	 * Metodo responsavel por editar uma Escola
+	 * @param Integer $id
+	 * @param SchoolFormModel $formModel
+	 * @return Void
+	 */
 	public function edit($id, SchoolFormModel $formModel){
 		$schoolsSQL = DB::conn()->prepare('UPDATE schools
 			SET name = :name, andress = :andress, status = :status
@@ -54,6 +73,11 @@ class Schools {
 		]);
 	}
 	
+	/*
+	 * Retorna uma Escola especifica
+	 * @param Integer $id
+	 * @return Object
+	 */
 	public function find($id){
 		$studentsSQL = DB::conn()->prepare('SELECT * FROM schools WHERE id = :id LIMIT 1');
 		$studentsSQL->execute([
@@ -67,6 +91,11 @@ class Schools {
 		return false;
 	}
 	
+	/*
+	 * Deleta uma Escola especifica
+	 * @param Integer $id
+	 * @return Boolean
+	 */
 	public function remove($id){
 		$schoolsSQL = DB::conn()->prepare('DELETE FROM schools WHERE id = :id LIMIT 1');
 		$schoolsSQL->execute([

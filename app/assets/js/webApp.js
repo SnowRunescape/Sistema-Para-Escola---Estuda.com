@@ -120,6 +120,22 @@ const webApp = {
 		}
 	},
 	classes: {
+		addStudent(id){
+			$.ajax({
+				url: '/api/classes/addStudent',
+				type: 'POST',
+				data: {
+					'class_id': school.class.id,
+					'student_id': id
+				}
+			}).done(function(data){
+				location.reload();
+			}).fail(function(data){
+				Swal.fire('Oops...', data.responseJSON.message, 'error').then((result) => {
+					webApp.form.loading.hide(_form);
+				});
+			});
+		},
 		newClasse(){
 			let _form = '#webAppForm-classe';
 			
@@ -177,6 +193,70 @@ const webApp = {
 				});
 			});
 		},
+		removeStudent(id){
+			let _form = '#students';
+			
+			webApp.form.loading.show(_form);
+			
+			$.ajax({
+				url: '/api/classes/deleteStudent',
+				type: 'POST',
+				data: {
+					'class_id': school.class.id,
+					'student_id': id
+				}
+			}).done(function(data){
+				location.reload();
+			}).fail(function(data){
+				Swal.fire('Oops...', data.responseJSON.message, 'error').then((result) => {
+					webApp.form.loading.hide(_form);
+				});
+			});
+		},
+		prepareAddStudent(){
+			Swal.fire({
+				title: 'Adicionando Novo Aluno',
+				input: 'select',
+				text: 'Informe o Nome ou ID do Aluno',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Adicionar',
+				cancelButtonText: 'Cancelar',
+				onOpen: function(){
+					$('.swal2-select').select2({
+						placeholder: 'Selecione Aluno',
+						ajax: {
+							url: '/api/students/all',
+							type: 'POST',
+							data: function(params){
+								var query = {
+									search: params.term,
+									school_id: school.id
+								};
+								
+								return query;
+							},
+							processResults: function(data){
+								let students = [];
+								
+								data.students.forEach(function(item, index){
+									students.push({ id: item.id, text: item.name })
+								});
+								
+								return {
+									results: students
+								};
+							}
+						}
+					});
+				}
+			}).then((result) => {
+				if(result.isConfirmed){
+					webApp.classes.addStudent(result.value);
+				}
+			});
+		},
 		prepareRemoveClasse(id){
 			Swal.fire({
 				title: 'Você tem certeza?',
@@ -190,6 +270,22 @@ const webApp = {
 			}).then((result) => {
 				if(result.isConfirmed){
 					webApp.classes.removeClasse(id);
+				}
+			});
+		},
+		prepareRemoveStudent(id){
+			Swal.fire({
+				title: 'Você tem certeza?',
+				text: 'Você não poderá reverter isso!',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Sim, exclua!',
+				cancelButtonText: 'Não, cancelar!'
+			}).then((result) => {
+				if(result.isConfirmed){
+					webApp.classes.removeStudent(id);
 				}
 			});
 		}
