@@ -1,13 +1,15 @@
 <?php
 header('Content-Type: application/json');
 
-$apiPage = $page = $params[2] ?: null;
+$apiPage = isset($params[2]) ? $params[2] : null;
 
 $paramsLocal = "view/api/{$apiPage}.php";
 
 if(file_exists($paramsLocal)){
 	require $paramsLocal;
-} else {
+}
+
+if(!isset($response)){
 	$response = [
 		'status' => 400,
 		'd' => [
